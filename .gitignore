@@ -1,0 +1,4 @@
+*.hpp
+src/holoml
+
+.ipynb_checkpoints/
