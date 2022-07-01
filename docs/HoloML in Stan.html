@@ -13109,13 +13109,6 @@ div#notebook {
 <p>To solve this problem in Stan, we first write down the forward scientific model given by Barmherzig and Sun, including the Poisson photon distribution and censored data inherent to the physical problem, and then find a solution via penalized maximum likelihood.</p>
 <h3 id="Experimental-setup">Experimental setup<a class="anchor-link" href="#Experimental-setup">&#182;</a></h3><p>In coherent diffraction imaging (CDI), a radiation source, typically an X-ray, is directed at a biomolecule or other specimen of interest, which causes diffraction. The resulting photon flux is measured by a far-field detector. The expected photon flux is approximately the squared magnitude of the Fourier transform of the electric field causing the diffraction. Inverting this to recover an image of the specimen is a problem usually known as <em>phase retrieval</em>. The phase retrieval problem is highly challenging and often lacks a unique solution <a href="#References">[2]</a>.</p>
 <p>Holographic coherent diffraction imaging (HCDI) is a variant in which the specimen is placed some distance away from a known reference object, and the data observed is the pattern of  diffraction around both the specimen and the reference. The addition of a reference object provides additional constraints on this problem, and transforms it into a linear deconvolution problem which has a unique, closed-form solution in the idealized setting <a href="#References">[3]</a>.</p>
-<h3 id="TODO:-Find-image-with-open-license-showing-experiment">TODO: Find image with open license showing experiment<a class="anchor-link" href="#TODO:-Find-image-with-open-license-showing-experiment">&#182;</a></h3><!-- <center>
-<img src="./figure 1.jpg" width=400 />
-</center>
-<center>
-<i>Illustration of the experimental setup </i> 
-</center>     -->
-
 <p>The idealized version of HCDI is formulated as</p>
 <ul>
 <li>Given a reference $R$, data $Y = | \mathcal{F}( X + R ) | ^2$ </li>
@@ -13274,7 +13267,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.image.AxesImage at 0x7f1adfea7700&gt;</pre>
+<pre>&lt;matplotlib.image.AxesImage at 0x7f321854b430&gt;</pre>
 </div>
 
 </div>
@@ -13333,7 +13326,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.image.AxesImage at 0x7f1ad7d982b0&gt;</pre>
+<pre>&lt;matplotlib.image.AxesImage at 0x7f3210434100&gt;</pre>
 </div>
 
 </div>
@@ -13395,7 +13388,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.image.AxesImage at 0x7f1ad7ddeaa0&gt;</pre>
+<pre>&lt;matplotlib.image.AxesImage at 0x7f321047a7d0&gt;</pre>
 </div>
 
 </div>
@@ -13453,7 +13446,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.image.AxesImage at 0x7f1ad6345a20&gt;</pre>
+<pre>&lt;matplotlib.image.AxesImage at 0x7f320eae1750&gt;</pre>
 </div>
 
 </div>
@@ -13512,7 +13505,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.image.AxesImage at 0x7f1ad63b4c40&gt;</pre>
+<pre>&lt;matplotlib.image.AxesImage at 0x7f320eb50970&gt;</pre>
 </div>
 
 </div>
@@ -13574,7 +13567,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.image.AxesImage at 0x7f1ad6424250&gt;</pre>
+<pre>&lt;matplotlib.image.AxesImage at 0x7f320e997f40&gt;</pre>
 </div>
 
 </div>
@@ -13631,7 +13624,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.image.AxesImage at 0x7f1ad6462710&gt;</pre>
+<pre>&lt;matplotlib.image.AxesImage at 0x7f320e9fe440&gt;</pre>
 </div>
 
 </div>
@@ -13691,8 +13684,8 @@ div#notebook {
 <h3 id="Model-inputs">Model inputs<a class="anchor-link" href="#Model-inputs">&#182;</a></h3><p>The Stan model needs the same information the generative model did, except it is supplied with $\tilde{Y}$ instead of the source image $X$, plus a scale parameter for the prior, $\sigma$. Smaller values of $\sigma$ (approaching 0) lead to increasing amounts of blur in the resulting image.</p>
 <div class="highlight"><pre><span></span><span class="kn">data</span> <span class="p">{</span>
   <span class="kt">int</span><span class="o">&lt;</span><span class="k">lower</span><span class="p">=</span><span class="mf">0</span><span class="o">&gt;</span> <span class="n">N</span><span class="p">;</span>                    <span class="c1">// image dimension</span>
-  <span class="kt">matrix</span><span class="o">&lt;</span><span class="k">lower</span><span class="p">=</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="k">upper</span><span class="p">=</span><span class="mf">1</span><span class="o">&gt;</span><span class="p">[</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">]</span> <span class="n">R</span><span class="p">;</span>  <span class="c1">// registration image</span>
-  <span class="kt">int</span><span class="o">&lt;</span><span class="k">lower</span><span class="p">=</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="k">upper</span><span class="p">=</span><span class="n">N</span><span class="o">&gt;</span> <span class="n">d</span><span class="p">;</span>           <span class="c1">// separation between sample and registration image</span>
+  <span class="kt">matrix</span><span class="o">&lt;</span><span class="k">lower</span><span class="p">=</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="k">upper</span><span class="p">=</span><span class="mf">1</span><span class="o">&gt;</span><span class="p">[</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">]</span> <span class="n">R</span><span class="p">;</span>  <span class="c1">// reference image</span>
+  <span class="kt">int</span><span class="o">&lt;</span><span class="k">lower</span><span class="p">=</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="k">upper</span><span class="p">=</span><span class="n">N</span><span class="o">&gt;</span> <span class="n">d</span><span class="p">;</span>           <span class="c1">// separation between sample and reference image</span>
   <span class="kt">int</span><span class="o">&lt;</span><span class="k">lower</span><span class="p">=</span><span class="n">N</span><span class="o">&gt;</span> <span class="n">M1</span><span class="p">;</span>                   <span class="c1">// rows of padded matrices</span>
   <span class="kt">int</span><span class="o">&lt;</span><span class="k">lower</span><span class="p">=</span><span class="mf">2</span> <span class="o">*</span> <span class="n">N</span> <span class="o">+</span> <span class="n">d</span><span class="o">&gt;</span> <span class="n">M2</span><span class="p">;</span>           <span class="c1">// cols of padded matrices</span>
   <span class="kt">int</span><span class="o">&lt;</span><span class="k">lower</span><span class="p">=</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="k">upper</span><span class="p">=</span><span class="n">M1</span><span class="o">&gt;</span> <span class="n">r</span><span class="p">;</span>          <span class="c1">// beamstop radius. replaces omega1, omega2 in paper</span>
@@ -13703,7 +13696,7 @@ div#notebook {
   <span class="kt">real</span><span class="o">&lt;</span><span class="k">lower</span><span class="p">=</span><span class="mf">0</span><span class="o">&gt;</span> <span class="n">sigma</span><span class="p">;</span>                <span class="c1">// standard deviation of pixel prior.</span>
 <span class="p">}</span>
 </pre></div>
-<p>The constraints listed above such as <code>lower=0</code> perform input validation. For example, the size of the padded FFT is, at a minimum, the size of the hybrid $X0R$ specimen, and we are able to encode this in the model with the lower bounds on <code>M1</code> and <code>M2</code>.</p>
+<p>The constraints listed above, such as <code>lower=0</code>, perform input validation. For example, the size of the padded FFT is, at a minimum, the size of the hybrid $X0R$ specimen, and we are able to encode this in the model with the lower bounds on <code>M1</code> and <code>M2</code>.</p>
 <h3 id="Additional-fixed-information">Additional fixed information<a class="anchor-link" href="#Additional-fixed-information">&#182;</a></h3><p>Stan provides the ability to compute transformed data, values which depend on the inputs but only need to be evaluated once per model. This allows us to construct and store $\mathcal{B}$ once, without recomputing it each iteration or requiring it as input.</p>
 <div class="highlight"><pre><span></span><span class="kn">transformed data</span> <span class="p">{</span>
   <span class="kt">matrix</span><span class="p">[</span><span class="n">M1</span><span class="p">,</span> <span class="n">M2</span><span class="p">]</span> <span class="n">B_cal</span> <span class="o">=</span> <span class="n">beamstop_gen</span><span class="p">(</span><span class="n">M1</span><span class="p">,</span> <span class="n">M2</span><span class="p">,</span> <span class="n">r</span><span class="p">);</span>
@@ -13865,8 +13858,8 @@ INFO:cmdstanpy:Chain [1] done processing
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 189 ms, sys: 12.3 ms, total: 201 ms
-Wall time: 2min 11s
+<pre>CPU times: user 191 ms, sys: 28.9 ms, total: 220 ms
+Wall time: 2min 15s
 </pre>
 </div>
 </div>
@@ -13914,7 +13907,7 @@ Wall time: 2min 11s
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.image.AxesImage at 0x7f1ad563bb50&gt;</pre>
+<pre>&lt;matplotlib.image.AxesImage at 0x7f320dcdf880&gt;</pre>
 </div>
 
 </div>
@@ -13989,8 +13982,8 @@ INFO:cmdstanpy:Chain [1] done processing
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 231 ms, sys: 70.8 ms, total: 302 ms
-Wall time: 3min 10s
+<pre>CPU times: user 181 ms, sys: 67.6 ms, total: 249 ms
+Wall time: 3min 15s
 </pre>
 </div>
 </div>
@@ -14041,8 +14034,8 @@ INFO:cmdstanpy:Chain [1] done processing
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 158 ms, sys: 13 ms, total: 171 ms
-Wall time: 1min 12s
+<pre>CPU times: user 154 ms, sys: 23.1 ms, total: 178 ms
+Wall time: 1min 15s
 </pre>
 </div>
 </div>
@@ -14096,7 +14089,7 @@ Wall time: 1min 12s
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.image.AxesImage at 0x7f1ad41e9c90&gt;</pre>
+<pre>&lt;matplotlib.image.AxesImage at 0x7f320c6899c0&gt;</pre>
 </div>
 
 </div>
@@ -14167,8 +14160,8 @@ INFO:cmdstanpy:Chain [1] done processing
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 170 ms, sys: 30.6 ms, total: 201 ms
-Wall time: 3min 20s
+<pre>CPU times: user 196 ms, sys: 45.2 ms, total: 242 ms
+Wall time: 3min 19s
 </pre>
 </div>
 </div>
@@ -14214,8 +14207,8 @@ INFO:cmdstanpy:Chain [1] done processing
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 199 ms, sys: 17.4 ms, total: 216 ms
-Wall time: 2min 37s
+<pre>CPU times: user 197 ms, sys: 39.9 ms, total: 237 ms
+Wall time: 2min 25s
 </pre>
 </div>
 </div>
@@ -14260,7 +14253,7 @@ Wall time: 2min 37s
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.image.AxesImage at 0x7f1ace908e20&gt;</pre>
+<pre>&lt;matplotlib.image.AxesImage at 0x7f3207040be0&gt;</pre>
 </div>
 
 </div>
@@ -14579,17 +14572,17 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Last updated: Thu Jun 30 2022
+<pre>Last updated: Fri Jul 01 2022
 
 Python implementation: CPython
 Python version       : 3.10.4
 IPython version      : 8.4.0
 
-cmdstanpy : 1.0.1
 scipy     : 1.8.0
-numpy     : 1.22.3
+cmdstanpy : 1.0.1
 IPython   : 8.4.0
 matplotlib: 3.5.2
+numpy     : 1.22.3
 
 Watermark: 2.3.1
 
